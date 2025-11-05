@@ -18,9 +18,6 @@ use Yii;
  */
 class StudentsController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
     public function behaviors()
     {
         return array_merge(
@@ -36,11 +33,6 @@ class StudentsController extends Controller
         );
     }
 
-    /**
-     * Lists all Students models.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
         $searchModel = new StudentsClass();
@@ -52,12 +44,6 @@ class StudentsController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Students model.
-     * @param int $id
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($id)
     {
         $model = Students::findOne($id);
@@ -66,11 +52,6 @@ class StudentsController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Students model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
     public function actionCreate()
     {
         $model = new Students();
@@ -120,33 +101,45 @@ class StudentsController extends Controller
         ]);
     }
 
-
-    /**
-     * Updates an existing Students model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->class_ids = $model->getClasses()->select('id')->column();
-
         $classes = Classes::find()->select(['name', 'id'])->indexBy('id')->column();
 
+        // Get current class IDs (if using pivot table)
+        $model->class_ids = $model->getClasses()->select('id')->column();
+
         if ($model->load(Yii::$app->request->post())) {
+            // ✅ Handle uploaded file
+            $model->imageFile = UploadedFile::getInstance($model, 'photo');
+            if ($model->imageFile) {
+                // Remove old photo if exists
+                if (!empty($model->photo) && file_exists(Yii::getAlias('@webroot/' . $model->photo))) {
+                    @unlink(Yii::getAlias('@webroot/' . $model->photo));
+                }
+
+                // Upload new photo
+                $model->upload();
+            }
+
+            $selectedClasses = Yii::$app->request->post('Students')['class_id'] ?? [];
+            if (!is_array($selectedClasses)) {
+                $selectedClasses = [$selectedClasses];
+            }
+
             if ($model->validate()) {
                 if ($model->save(false)) {
-                    Yii::$app->db->createCommand()->delete('{{%student_classes}}', ['student_id' => $model->id])->execute();
 
-                    if (!empty($model->class_ids)) {
-                        foreach ($model->class_ids as $classId) {
-                            Yii::$app->db->createCommand()->insert('{{%student_classes}}', [
-                                'student_id' => $model->id,
-                                'class_id' => $classId,
-                            ])->execute();
-                        }
+                    // ✅ Update student_classes junction table
+                    Yii::$app->db->createCommand()
+                        ->delete('{{%student_classes}}', ['student_id' => $model->id])
+                        ->execute();
+
+                    foreach ($selectedClasses as $classId) {
+                        $sc = new StudentClasses();
+                        $sc->student_id = $model->id;
+                        $sc->class_id = $classId;
+                        $sc->save(false);
                     }
 
                     Yii::$app->session->setFlash('success', '✅ Student updated successfully!');
@@ -157,7 +150,7 @@ class StudentsController extends Controller
                 foreach ($model->errors as $attribute => $messages) {
                     $errors[] = "<b>{$attribute}</b>: " . implode(', ', $messages);
                 }
-                Yii::$app->session->setFlash('error', "❌ Update failed:<br>" . implode('<br>', $errors));
+                Yii::$app->session->setFlash('error', "❌ Failed to update student:<br>" . implode('<br>', $errors));
             }
         }
 
@@ -168,13 +161,6 @@ class StudentsController extends Controller
     }
 
 
-    /**
-     * Deletes an existing Students model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
@@ -218,4 +204,40 @@ class StudentsController extends Controller
 
         return ['success' => false, 'name' => '', 'phone' => ''];
     }
+
+    public function actionSearch($term = '')
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $results = [];
+
+        if (!empty($term)) {
+            $students = Students::find()
+                ->where(['like', 'full_name', $term])
+                ->limit(10)
+                ->all();
+
+            foreach ($students as $student) {
+                $results[] = [
+                    'id' => $student->id,
+                    'text' => $student->full_name,
+                ];
+            }
+        }
+
+        return ['results' => $results];
+    }
+
+    public function actionAdmissionLetter($id)
+    {
+        $student = Students::findOne($id);
+        if (!$student) {
+            throw new \yii\web\NotFoundHttpException('Student not found.');
+        }
+
+        return $this->render('admission-letter', [
+            'student' => $student,
+        ]);
+    }
+
+
 }

@@ -33,32 +33,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     <span>- All Students</span>
                 </div>
                 <div style="float:right;">
-                    <a href="allstudents.php" data-toggle="tooltip" title="Reload all students"><span class="links" style="padding: 3px 20px"><i class="fa-solid fa-arrows-rotate"></i></span></a>
                      <button class="links btn btn-primary" type="button" title="Show Search Options" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="padding: 0 20px">
                         <i class="fa-solid fa-magnifying-glass"></i> Search
                     </button>
+                    <a href=""></a>
                 </div>
             </div>
 
         </div>
 
-
-<!--        <div class="collapse" id="collapseExample">-->
-<!--            <div class="col-md-6 col-lg-4 col-xl-6"></div>-->
-<!--            <div class="col-md-6 col-lg-4 col-xl-3 p-r-0">-->
-<!--                <div class="card card-body">-->
-<!--                    Some placeholder content for the collapse component.-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-md-6 col-lg-4 col-xl-3 p-r-0">-->
-<!--                <div class="card card-body">-->
-<!--                    Some placeholder content for the collapse component.-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
         <div class="row mt-3 ps-1 ">
-
             <?php foreach ($dataProvider->models as $student): ?>
                 <div class="rounded-4" style="float:left;text-align:center;margin:10px;width:155px;line-height:15px;background:#fff;padding:15px;box-shadow:0px 0px 1px 0px gray;">
                     <img class="img-fluid rounded-circle mx-auto"
@@ -72,8 +56,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <br>
                     <b style="font-size:11px;color:#555;">UZ <?= Html::encode($student->name[0]) ?><?= Html::encode($student->registration_number) ?></b>
                     <div class="d-flex align-items-center justify-content-center gap-1 mt-2">
-                        <a href="<?= Url::to(['students/view', 'id' => $student->id]) ?>" class="btn btn-sm rounded-circle bg-m-gray text-white d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" data-toggle="tooltip" type="submit" name="sview" title="view"><i class="fa-solid fa-eye"></i></a>
-                        <a href="<?= Url::to(['students/update', 'id' => $student->id]) ?>" class="btn btn-sm rounded-circle bg-m-blue1 text-white d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" data-toggle="tooltip" type="submit" name="sedit" title="edit"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="<?= Url::to(['students/view', 'id' => $student->id]) ?>" class="btn btn-sm rounded-circle bg-m-gray text-white d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" data-toggle="tooltip" type="submit" title="view"><i class="fa-solid fa-eye"></i></a>
+                        <a href="<?= Url::to(['students/update', 'id' => $student->id]) ?>" class="btn btn-sm rounded-circle bg-m-blue1 text-white d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" data-toggle="tooltip" type="submit" title="edit"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="<?= Url::to(['students/admission-letter', 'id' => $student->id]) ?>" class="btn btn-sm rounded-circle bg-m-blue1 text-white d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" data-toggle="tooltip" type="submit" title="Students Admission Letter"><i class="fa-regular fa-file"></i></a>
                         <a href="" class="btn btn-sm rounded-circle bg-m-orange text-white d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" data-toggle="tooltip" type="submit" onclick="return confirm('Are You Sure You Want To Delete Student Record ?')" name="sdelete" title="delete"><i class="fa-solid fa-trash"></i></a>
                     </div>
                 </div>

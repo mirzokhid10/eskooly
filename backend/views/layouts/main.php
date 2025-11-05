@@ -36,7 +36,13 @@ use yii\helpers\Html;
 <!-- ✅ JS FILES (put BEFORE $this->endBody()) -->
 <?= Html::jsFile('@web/assets/js/sidebar.js') ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<!---->
+<!--Charts JS-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
 <?php
 $flashes = Yii::$app->session->getAllFlashes();
 if (!empty($flashes)): ?>
@@ -66,12 +72,10 @@ if (!empty($flashes)): ?>
     </script>
 <?php endif; ?>
 <?php
-\yii\web\YiiAsset::register($this);
-\yii\bootstrap5\BootstrapAsset::register($this);
-\yii\bootstrap5\BootstrapPluginAsset::register($this);
+    \yii\web\YiiAsset::register($this);
+    \yii\bootstrap5\BootstrapAsset::register($this);
+    \yii\bootstrap5\BootstrapPluginAsset::register($this);
 ?>
-
-
 
 </body>
 </html>

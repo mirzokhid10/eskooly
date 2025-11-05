@@ -12,6 +12,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Students', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+<?php
+$this->registerJsFile('https://cdn.jsdelivr.net/npm/chart.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+?>
+
 <div class="students-view">
 
     <div class="pcoded-content">
@@ -149,15 +153,22 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </div>
 
                             </div>
-                            <div class="col-lg-9 col-md-12 m-round" style="background:none;margin-bottom:0px;">
+                            <div class="col-lg-9 col-md-12 rounded-4 mb-0 bg-transparent" >
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <h6 class="w-100"><div class="bg-gradient-blue m-white" style="width:20px;height:20px;border-radius:10px;display:inline-block;padding-top:3px;padding-left:7px;">1</div> <strong class="gradient-blue f-16">Attendance Report </strong><span style="font-size:12px;" class="f-right"></span></h6>
-                                        <div class="row m-round m-b-20" style="border-radius:5px;padding-bottom:10px;background:#FFF;margin-left:5px;padding:5px;box-shadow:0px 0px 1px 0px gray;">
+                                        <h6 class="w-100">
+                                            <div class="bg-gradient-blue text-white view_middle_block_title_order">1</div>
+                                            <strong class="gradient-blue view_middle_block_title">Attendance Report </strong>
+                                        </h6>
+                                        <div class="row rounded-4 mb-4 bg-white p-2 border-light-subtle ms-2 bg-white" >
+                                            <div class="col-5 p-0 text-white ">
+                                                <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                                </div>
+                                                <canvas id="myPieChart" width="216" height="216" style="display: block; height: 173px; width: 173px;"></canvas>
+                                            </div>
 
-                                            <div class="col-5 p-0" style="padding:0px !important;color:#fff;"><canvas id="pieChart" width="100%" height="100%"></canvas></div>
                                             <div class="col-3 p-0 text-center">
-                                                <div class="block1">
+                                                <div class="block1 m-0 p-0 text-white mx-auto">
                                                     <div class="box1" style="background:#ff808b;">
                                                         <p class="number1 p-0 m-0">
                                                             <span class="num1">34</span>
@@ -176,14 +187,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         <circle class="circle1" cx="55" cy="55" r="39" />
                                                     </svg>
                                                 </div>
-                                                <button class="btn btn-sm" style="border:1px solid #999;border-radius:15px;width:100%;text-align:center;padding:3px;font-size:10px;position:relative;padding-top:5px;background:#FFFFF7;">
+                                                <button class="btn btn-sm view_middle_block_button">
                                                     <font style="font-size:10px;font-weight:bold;" class="m-gray">NOT MARKED</font>
                                                     <span class="m-gray" style="position:absolute;top:-7px;left:5px;background:#fff;font-size:9px;padding:none;padding-left:4px; padding-right:4px;border-radius:10px;line-height:12px;border:1px solid #999;"><span class="bg-m-gray badge" style="padding:3px;"></span> Today</span>
                                                 </button>
 
                                             </div>
-                                            <div class="col-3 p-0" style="">
-                                                <div class="block2">
+                                            <div class="col-3 p-0">
+                                                <div class="block2 m-0 p-0 text-white mx-auto">
                                                     <div class="box2" style="background:#ff808b;">
                                                         <p class="number2 p-0 m-0">
                                                             <span class="num2">0</span>
@@ -191,10 +202,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         </p>
                                                         <p class="title2 p-0 m-0">Nov 2025</p>
                                                     </div>
-                                                    <span class="dots2"></span>
-                                                    <svg class="svg2">
+                                                    <span class="dots1"></span>
+                                                    <svg class="svg1">
                                                         <defs>
-                                                            <linearGradient id="gradientStyle2">
+                                                            <linearGradient id="gradientStyle">
                                                                 <stop offset="0%" stop-color="#ff808b" />
                                                                 <stop offset="100%" stop-color="#9698d6" />
                                                             </linearGradient>
@@ -202,12 +213,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         <circle class="circle2" cx="55" cy="55" r="39" />
                                                     </svg>
                                                 </div>
-                                                <button class="btn btn-sm m-l-10" style="border:1px solid #999;border-radius:15px;width:100%;text-align:center;padding:3px;font-size:10px;position:relative;padding-top:5px;background:#FFFFF7;">
-                                                    <font style="font-size:10px;font-weight:bold;" class="m-green"><i class="fa fa-check"></i> PRESENT</font>
-                                                    <span class="m-gray" style="position:absolute;top:-7px;left:5px;background:#fff;font-size:9px;padding:none;padding-left:4px; padding-right:4px;border-radius:10px;line-height:12px;border:1px solid #999;"><span class="bg-c-green badge" style="padding:3px;"></span> Yesterday</span>
+                                                <button class="btn btn-sm view_middle_block_button" style="border:1px solid #999;border-radius:15px;width:100%;text-align:center;padding:3px;font-size:10px;position:relative;padding-top:5px;background:#FFFFF7;">
+                                                    <font class="m-gray">NOT MARKED</font>
+                                                    <span class="m-gray"><span class="bg-m-gray badge" style="padding:3px;"></span> Yesterday</span>
                                                 </button>
                                             </div>
-                                            <div class="col-12" style="margin-top:8px;margin-bottom:10px;">
+                                            <div class="col-12 text-white" style="margin-top:8px;margin-bottom:10px;">
                                                 <div class="row" style="padding-left:4px;padding-right:4px;">
                                                     <div class="col-4" style="padding:4px;">
                                                         <div class="bg-m-blue1" style="border-radius:6px;">
@@ -266,41 +277,46 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 </div>
                                             </div>
                                         </div>
-                                        <h6 class="w-100"><div class="bg-gradient-blue m-white" style="width:20px;height:20px;border-radius:10px;display:inline-block;padding-top:3px;padding-left:6px;">2</div> <strong class="gradient-blue f-16">Class Tests Report </strong><span style="font-size:12px;" class="f-right"></span></h6>
-                                        <div class="row m-t-10 m-b-20 m-round" style="padding-bottom:10px;padding:5px;background:#FFF;margin-left:5px;box-shadow:0px 0px 1px 0px gray;">
-
+                                        <h6 class="w-100">
+                                            <div class="bg-gradient-blue text-white view_middle_block_title_order">2</div>
+                                            <strong class="gradient-blue view_middle_block_title">Class Tests Report </strong>
+                                        </h6>
+                                        <div class="row mt-3 mb-4 rounded-4 bg-white p-2 border-light-subtle ms-2 view_middle_block_test_report">
                                             <div class="col-12 p-0">
-                                                <div class="row m-10 p-10 p-b-0 m-round" style="background:#fff;">
-                                                    <div class="col-8 m-gray p-0 f-10" style="line-height:15px;">
-                                                        <strong class="m-dblue f-16"><i class="ti-book"></i> Present Tense</strong><br>
-                                                        <div style="margin-top:5px;margin-bottom:5px;">
-                                                            <strong class="f-14 m-orange" style="display:inline-block;">27%</strong>
-                                                            <div class="progress" style="height:8px;border-radius:5px;width:90px;display:inline-block;">
-
-                                                                <div class="progress-bar bg-gradient-red f-left" role="progressbar" aria-valuenow="27"
-                                                                     aria-valuemin="0" aria-valuemax="100" style="width:27%;border-radius:5px;">
-
+                                                <div class="row m-3 p-2 pb-0 rounded-4 bg-white">
+                                                    <div class="col-8 p-0" style="line-height:16px; font-size: 16px; color: #9698d6 !important; ">
+                                                        <strong class="f-16"><i class="fa-solid fa-book-open"></i> Present Tense</strong><br>
+                                                        <div class="" style="margin-top:5px;margin-bottom:5px;">
+<!--                                                            <strong class="f-14 m-orange" style="display:inline-block;">27%</strong>-->
+                                                            <div style="margin-top:5px;margin-bottom:5px;">
+                                                                <strong class="d-inline-block" style="font-size: 14px; color: orangered">27 %</strong>
+                                                                <div class="progress" role="progressbar" aria-label="Danger example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                                                    <div class="progress-bar bg-danger" style="width: 100%"></div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
-                                                        <span class="bg-m-orange badge" style="padding:5px;"></span> TOTAL <b>CLASS TESTS</b> (<strong class="m-orange f-12">1</strong>)<br>
-                                                        <span class="bg-m-gray badge" style="padding:5px;"></span> TOTAL <b>MARKS</b> (<strong class="m-gray f-12">285</strong>)<br>
-                                                        <span class="bg-m-blue1 badge" style="padding:5px;"></span> OBTAINED <b>MARKS</b> (<strong class="m-blue1 f-12">75</strong>)
+                                                        <span class="bg-danger badge " style="padding:5px; font-size: 10px;"></span> <b style="font-size: 10px;">TOTAL CLASS TESTS</b> (<strong class="m-orange f-12 " style="font-size: 12px;">1</strong>)<br>
+                                                        <span class="bg-gradient-blue badge" style="padding:5px; font-size: 10px;"></span> <b style="font-size: 10px;">TOTAL MARKS</b> (<strong class="m-gray f-12 " style="font-size: 12px;">285</strong>)<br>
+                                                        <span class="bg-primary badge" style="padding:5px; font-size: 10px;"></span> <b style="font-size: 10px;">OBTAINED  MARKS</b> (<strong class="m-blue1 f-12 " style="font-size: 12px;">75</strong>)
                                                     </div>
                                                     <div class="col-4 p-0">
-                                                        <input type="hidden" value="27" id="perval0">
-                                                        <div id="progress0">
-                                                            <svg viewbox="0 0 110 100">
-                                                                <linearGradient id="gradient0" x1="0" y1="0" x2="0" y2="100%">
-                                                                    <stop offset="0%" stop-color="#f5365c" />
-                                                                    <stop offset="100%" stop-color="#f56036" />
-                                                                </linearGradient>
-                                                                <path class="grey" d="M30,90 A40,40 0 1,1 80,90" fill='none' />
-                                                                <path id="blue" fill='none'  class="blue" d="M30,90 A40,40 0 1,1 80,90" style="stroke: url(#gradient0);"/>
-
-                                                                <text x="50%" y="60%"  dominant-baseline="middle" text-anchor="middle" style="font-size:18px;font-weight:900;">27%</text>
-                                                                <text x="50%" y="90%" dominant-baseline="middle" text-anchor="middle" style="font-size:12px;">score</text>
+                                                        <div class="block1 m-0 p-0 text-white mx-auto">
+                                                            <div class="box1" style="background:#ff808b;">
+                                                                <p class="number1 p-0 m-0">
+                                                                    <span class="num1">27</span>
+                                                                    <span class="sub1">%</span>
+                                                                </p>
+                                                                <p class="title1 p-0 m-0">Score</p>
+                                                            </div>
+                                                            <span class="dots1"></span>
+                                                            <svg class="svg1">
+                                                                <defs>
+                                                                    <linearGradient id="gradientStyle">
+                                                                        <stop offset="0%" stop-color="#ff808b" />
+                                                                        <stop offset="100%" stop-color="#9698d6" />
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <circle class="circle1" cx="55" cy="55" r="39" />
                                                             </svg>
                                                         </div>
                                                     </div>
@@ -312,190 +328,64 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                     </div>
                                     <div class="col-lg-6">
-                                        <h6 class="w-100"><div class="bg-gradient-blue m-white" style="width:20px;height:20px;border-radius:10px;display:inline-block;padding-top:3px;padding-left:6px;">3</div> <strong class="gradient-blue f-16">Examination Report </strong><span style="font-size:12px;" class="f-right"></span></h6>
-                                        <div class="row m-round m-t-10 m-b-20" style="padding:5px;background:#fff;margin-left:5px;padding-top:15px;box-shadow:0px 0px 1px 0px gray;">
+                                        <h6 class="w-100">
+                                            <div class="bg-gradient-blue text-white view_middle_block_title_order">3</div>
+                                            <strong class="gradient-blue view_middle_block_title">Examination Report </strong>
+                                        </h6>
+                                        <div class="row rounded-4 mb-4 bg-white p-2 border-light-subtle ms-2 bg-white" style="color: #9698d6 !important;">
                                             <div class="col-12 text-center">
-                                                <p class="text-center m-gray f-12 m-t-10"><img src="assets/nf.webp" style="width:200px;"><br><strong><i class="ti-search"></i> No Record Found.</strong></p>
+                                                <p class="text-center m-gray f-12 mt-3">
+                                                    <img class="mx-auto" src="<?= Yii::getAlias('@web') ?>/assets/icons/nodatefound.webp" style="width:200px;">
+
+                                                    <strong>
+                                                        <i class="fa-solid fa-magnifying-glass"></i> No Record Found.
+                                                    </strong>
+                                                </p>
                                             </div>
                                         </div>
-                                        <h6 class="w-100"><div class="bg-gradient-blue m-white" style="width:20px;height:20px;border-radius:10px;display:inline-block;padding-top:2px;padding-left:5px;">4</div> <strong class="gradient-blue f-16">Fee Report </strong><span style="font-size:12px;" class="f-right"></span></h6>
-                                        <div class="row m-t-10 m-round" style="padding:5px;background:#fff;margin-left:5px;box-shadow:0px 0px 1px 0px gray;">
+                                        <h6 class="w-100">
+                                            <div class="bg-gradient-blue text-white view_middle_block_title_order">4</div>
+                                            <strong class="gradient-blue view_middle_block_title">Free Report </strong>
+                                        </h6>
+                                        <div class="row mt-3 rounded-4 bg-white border-light-subtle" style="padding:5px;background:#fff;margin-left:5px;box-shadow:0px 0px 1px 0px gray;">
                                             <div class="col-12 p-0">
-                                                <div class="row p-10 p-t-20 p-b-20 showfd" style="background:#fff;margin:15px;border-bottom:4px solid #f6f7fb;">
-                                                    <div class="col-2 p-0">
-                                                        <i class="fa fa-money f-14 bg-m-dblue m-white" style="border-radius:50%;padding:5px;"></i>
+                                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                                Accordion Item #1
+                                                            </button>
+                                                        </h2>
+                                                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item’s accordion body.</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-8 p-0 p-r-10">
-                                                        <strong class="m-dblue f-20 m-b-10" style="font-weight:900;line-height:20px;"><span id="symbol">$</span> 556,346                										                                										                    <span class="bg-c-yellow m-white badge f-10 f-right m-r-10" style="padding:5px;">PARTIALLY PAID</span>
-                                                        </strong><br>
-                                                        <span class="f-12 m-dblue"  style="line-height:12px;"> Fees of <b>
-                										                September, 2025                        												 </b>
-                        												 </span>
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                                Accordion Item #2
+                                                            </button>
+                                                        </h2>
+                                                        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item’s accordion body. Let’s imagine this being filled with some actual content.</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-2 p-0 text-center">
-                										                <span id="showfi" class="m-blue1 f-10">
-                            									       <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                                                                        <lord-icon
-                                                                                src="https://cdn.lordicon.com/rxufjlal.json"
-                                                                                trigger="loop"
-                                                                                delay="3000"
-                                                                                colors="primary:#e7e7e8"
-                                                                                state="intro"
-                                                                                style="width:35px;height:35px">
-                                                                        </lord-icon>
-                            									       </span>
-                                                        <span id="hidefi" class="m-gray">
-                            									       <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                                                                        <lord-icon
-                                                                                src="https://cdn.lordicon.com/xsdtfyne.json"
-                                                                                trigger="loop"
-                                                                                delay="2000"
-                                                                                colors="primary:#e7e7e8"
-                                                                                style="width:35px;height:35px">
-                                                                        </lord-icon>
-                            									       </span>
-                                                    </div>
-                                                    <div class="col-12 m-dblue p-t-10 p-0 f-10" id="fd" style="border-top:1px solid #4d4cac;line-height:12px;">
-                                                        <span class="p-l-10">Submission Date<strong class="f-right m-r-10">08 September, 2025</strong></span><br>
-                                                        <span class="p-l-10">Total Amount<strong class="f-right m-r-10"><span id="symbol">$</span> 556346</strong></span><br>
-                                                        <span class="p-l-10">Paid Amount<strong class="f-right m-r-10"><span id="symbol">$</span> 5456</strong></span>
-                                                        <hr class="m-0 p-0" style="border:none;background-color:#4d4cac;height:1px;margin-top:5px !important;margin-bottom:5px !important;">
-                                                        <span class="p-l-10">Remaining Balance<strong class="f-right m-r-10"><span id="symbol">$</span> 550890</strong></span>
-                                                    </div>
-                                                </div>
-                                                <div class="row p-10 p-t-20 p-b-20 showfd" style="background:#fff;margin:15px;border-bottom:4px solid #f6f7fb;">
-                                                    <div class="col-2 p-0">
-                                                        <i class="fa fa-money f-14 bg-m-dblue m-white" style="border-radius:50%;padding:5px;"></i>
-                                                    </div>
-                                                    <div class="col-8 p-0 p-r-10">
-                                                        <strong class="m-dblue f-20 m-b-10" style="font-weight:900;line-height:20px;"><span id="symbol">$</span> 556,346                										                                										                    <span class="bg-gradient-red m-white badge m-r-10 f-10 f-right" style="padding:5px;">UNPAID</span>
-                                                        </strong><br>
-                                                        <span class="f-12 m-dblue"  style="line-height:12px;"> Fees of <b>
-                										                September, 2025                        												 </b>
-                        												 </span>
-                                                    </div>
-                                                    <div class="col-2 p-0 text-center">
-                										                <span id="showfi" class="m-blue1 f-10">
-                            									       <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                                                                        <lord-icon
-                                                                                src="https://cdn.lordicon.com/rxufjlal.json"
-                                                                                trigger="loop"
-                                                                                delay="3000"
-                                                                                colors="primary:#e7e7e8"
-                                                                                state="intro"
-                                                                                style="width:35px;height:35px">
-                                                                        </lord-icon>
-                            									       </span>
-                                                        <span id="hidefi" class="m-gray">
-                            									       <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                                                                        <lord-icon
-                                                                                src="https://cdn.lordicon.com/xsdtfyne.json"
-                                                                                trigger="loop"
-                                                                                delay="2000"
-                                                                                colors="primary:#e7e7e8"
-                                                                                style="width:35px;height:35px">
-                                                                        </lord-icon>
-                            									       </span>
-                                                    </div>
-                                                    <div class="col-12 m-dblue p-t-10 p-0 f-10" id="fd" style="border-top:1px solid #4d4cac;line-height:12px;">
-                                                        <span class="p-l-10">Submission Date<strong class="f-right m-r-10">30 September, 2025</strong></span><br>
-                                                        <span class="p-l-10">Total Amount<strong class="f-right m-r-10"><span id="symbol">$</span> 556346</strong></span><br>
-                                                        <span class="p-l-10">Paid Amount<strong class="f-right m-r-10"><span id="symbol">$</span> 0</strong></span>
-                                                        <hr class="m-0 p-0" style="border:none;background-color:#4d4cac;height:1px;margin-top:5px !important;margin-bottom:5px !important;">
-                                                        <span class="p-l-10">Remaining Balance<strong class="f-right m-r-10"><span id="symbol">$</span> 556346</strong></span>
-                                                    </div>
-                                                </div>
-                                                <div class="row p-10 p-t-20 p-b-20 showfd" style="background:#fff;margin:15px;border-bottom:4px solid #f6f7fb;">
-                                                    <div class="col-2 p-0">
-                                                        <i class="fa fa-money f-14 bg-m-dblue m-white" style="border-radius:50%;padding:5px;"></i>
-                                                    </div>
-                                                    <div class="col-8 p-0 p-r-10">
-                                                        <strong class="m-dblue f-20 m-b-10" style="font-weight:900;line-height:20px;"><span id="symbol">$</span> 305,400                										                                										                    <span class="bg-c-yellow m-white badge f-10 f-right m-r-10" style="padding:5px;">PARTIALLY PAID</span>
-                                                        </strong><br>
-                                                        <span class="f-12 m-dblue"  style="line-height:12px;"> Fees of <b>
-                										                September, 2025                        												 </b>
-                        												 </span>
-                                                    </div>
-                                                    <div class="col-2 p-0 text-center">
-                										                <span id="showfi" class="m-blue1 f-10">
-                            									       <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                                                                        <lord-icon
-                                                                                src="https://cdn.lordicon.com/rxufjlal.json"
-                                                                                trigger="loop"
-                                                                                delay="3000"
-                                                                                colors="primary:#e7e7e8"
-                                                                                state="intro"
-                                                                                style="width:35px;height:35px">
-                                                                        </lord-icon>
-                            									       </span>
-                                                        <span id="hidefi" class="m-gray">
-                            									       <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                                                                        <lord-icon
-                                                                                src="https://cdn.lordicon.com/xsdtfyne.json"
-                                                                                trigger="loop"
-                                                                                delay="2000"
-                                                                                colors="primary:#e7e7e8"
-                                                                                style="width:35px;height:35px">
-                                                                        </lord-icon>
-                            									       </span>
-                                                    </div>
-                                                    <div class="col-12 m-dblue p-t-10 p-0 f-10" id="fd" style="border-top:1px solid #4d4cac;line-height:12px;">
-                                                        <span class="p-l-10">Submission Date<strong class="f-right m-r-10">08 September, 2025</strong></span><br>
-                                                        <span class="p-l-10">Total Amount<strong class="f-right m-r-10"><span id="symbol">$</span> 305400</strong></span><br>
-                                                        <span class="p-l-10">Paid Amount<strong class="f-right m-r-10"><span id="symbol">$</span> 54554</strong></span>
-                                                        <hr class="m-0 p-0" style="border:none;background-color:#4d4cac;height:1px;margin-top:5px !important;margin-bottom:5px !important;">
-                                                        <span class="p-l-10">Remaining Balance<strong class="f-right m-r-10"><span id="symbol">$</span> 250846</strong></span>
-                                                    </div>
-                                                </div>
-                                                <div class="row p-10 p-t-20 p-b-20 showfd" style="background:#fff;margin:15px;border-bottom:4px solid #f6f7fb;">
-                                                    <div class="col-2 p-0">
-                                                        <i class="fa fa-money f-14 bg-m-dblue m-white" style="border-radius:50%;padding:5px;"></i>
-                                                    </div>
-                                                    <div class="col-8 p-0 p-r-10">
-                                                        <strong class="m-dblue f-20 m-b-10" style="font-weight:900;line-height:20px;"><span id="symbol">$</span> 305,500                										                                										                    <span class="bg-c-yellow m-white badge f-10 f-right m-r-10" style="padding:5px;">PARTIALLY PAID</span>
-                                                        </strong><br>
-                                                        <span class="f-12 m-dblue"  style="line-height:12px;"> Fees of <b>
-                										                September, 2025                        												 </b>
-                        												 </span>
-                                                    </div>
-                                                    <div class="col-2 p-0 text-center">
-                										                <span id="showfi" class="m-blue1 f-10">
-                            									       <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                                                                        <lord-icon
-                                                                                src="https://cdn.lordicon.com/rxufjlal.json"
-                                                                                trigger="loop"
-                                                                                delay="3000"
-                                                                                colors="primary:#e7e7e8"
-                                                                                state="intro"
-                                                                                style="width:35px;height:35px">
-                                                                        </lord-icon>
-                            									       </span>
-                                                        <span id="hidefi" class="m-gray">
-                            									       <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                                                                        <lord-icon
-                                                                                src="https://cdn.lordicon.com/xsdtfyne.json"
-                                                                                trigger="loop"
-                                                                                delay="2000"
-                                                                                colors="primary:#e7e7e8"
-                                                                                style="width:35px;height:35px">
-                                                                        </lord-icon>
-                            									       </span>
-                                                    </div>
-                                                    <div class="col-12 m-dblue p-t-10 p-0 f-10" id="fd" style="border-top:1px solid #4d4cac;line-height:12px;">
-                                                        <span class="p-l-10">Submission Date<strong class="f-right m-r-10">08 September, 2025</strong></span><br>
-                                                        <span class="p-l-10">Total Amount<strong class="f-right m-r-10"><span id="symbol">$</span> 305500</strong></span><br>
-                                                        <span class="p-l-10">Paid Amount<strong class="f-right m-r-10"><span id="symbol">$</span> 100</strong></span>
-                                                        <hr class="m-0 p-0" style="border:none;background-color:#4d4cac;height:1px;margin-top:5px !important;margin-bottom:5px !important;">
-                                                        <span class="p-l-10">Remaining Balance<strong class="f-right m-r-10"><span id="symbol">$</span> 305400</strong></span>
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                                                Accordion Item #3
+                                                            </button>
+                                                        </h2>
+                                                        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item’s accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -531,4 +421,26 @@ $this->params['breadcrumbs'][] = $this->title;
 //         ],
 //    ]) ?>
 
-</div>
+
+
+<script>
+    // ✅ When page fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('myPieChart');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow'],
+                datasets: [{
+                    label: 'Test Data',
+                    data: [10, 20, 30],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)'
+                    ]
+                }]
+            }
+        });
+    });
+</script>

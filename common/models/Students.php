@@ -92,11 +92,12 @@ class Students extends \yii\db\ActiveRecord
         return $this->hasMany(StudentClasses::class, ['student_id' => 'id']);
     }
 
-//    public function getClasses()
-//    {
-//        return $this->hasMany(Classes::class, ['id' => 'class_id'])
-//            ->via('studentClasses');
-//    }
+    public function getClasses()
+    {
+        return $this->hasMany(Classes::class, ['id' => 'class_id'])
+            ->via('studentClasses');
+    }
+
     public function getClass()
     {
         return $this->hasOne(Classes::class, ['id' => 'class_id']);
