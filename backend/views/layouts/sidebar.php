@@ -66,6 +66,12 @@ function isActive($controller, $actions = []) {
                             Fees Particulars
                         </a>
                     </li>
+                    <li>
+                        <a href="<?= Url::to(['/fee-invoice/index']) ?>"
+                           class="block p-2 rounded-md <?= isActive('fee-invoice', ['index']) ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50' ?>">
+                            Fees Invoices
+                        </a>
+                    </li>
                 </ul>
             </li>
 

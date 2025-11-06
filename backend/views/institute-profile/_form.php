@@ -50,7 +50,7 @@ $countries = [
         <div class="row rounded-4">
             <div class="col-lg-6">
                 <div class="m-div">
-                    <label class="m-label bg-gradient-blue text-white">Institute Logo*</label>
+                    <label class="m-label bg-gradient-blue text-white position-absolute">Institute Logo*</label>
                     <div class="d-flex align-items-center justify-content-start">
                         <?= Html::img(
                             $model->institute_logo ? Yii::getAlias('@web/' . $model->institute_logo) : '@web/assets/icons/no-logo.jpg',
