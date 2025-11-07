@@ -10,8 +10,6 @@ use yii\grid\GridView;
 /** @var backend\models\Search\SearchClass $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Classes';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="classes-index" style="background-color: #F6F7FB">
 

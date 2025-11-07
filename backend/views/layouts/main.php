@@ -37,6 +37,8 @@ use yii\helpers\Html;
 
 <!-- ✅ JS FILES (put BEFORE $this->endBody()) -->
 <?= Html::jsFile('@web/assets/js/sidebar.js') ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <!--Charts JS-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>

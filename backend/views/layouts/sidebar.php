@@ -84,6 +84,15 @@ function isActive($controller, $actions = []) {
                 </a>
             </li>
 
+            <!-- Classes -->
+            <li class="rounded-lg hover:bg-gray-100">
+                <a href="<?= Url::to(['/subjects/index']) ?>"
+                   class="nav-link flex items-center p-2 rounded-lg gap-3 <?= $currentController === 'subjects' ? 'bg-blue-100 text-blue-600' : 'text-gray-700' ?>">
+                    <i class="fa-solid fa-book-open"></i>
+                    Subjects
+                </a>
+            </li>
+
             <!-- Students (Dropdown) -->
             <?php
             $isStudentsActive = $currentController === 'students';

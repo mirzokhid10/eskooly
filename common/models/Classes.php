@@ -70,4 +70,9 @@ class Classes extends \yii\db\ActiveRecord
         return $this->hasMany(Students::class, ['id' => 'student_id'])
             ->via('studentClasses');
     }
+
+    public function getSubjects()
+    {
+        return $this->hasMany(Subjects::class, ['class_id' => 'id']);
+    }
 }

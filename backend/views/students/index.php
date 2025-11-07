@@ -82,38 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
 
         </div>
-
-
-
-
     </div>
-
-<!--    <h1>--><?php //= Html::encode($this->title) ?><!--</h1>-->
-
-<!--        --><?php //= Html::a('Create Students', ['create'], ['class' => 'btn btn-success']) ?>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-<!--    --><?php //= GridView::widget([
-//        'dataProvider' => $dataProvider,
-//        'filterModel' => $searchModel,
-//        'columns' => [
-//            ['class' => 'yii\grid\SerialColumn'],
-//            'name',
-//            'email:email',
-//            'phone',
-//            'photo',
-//            'enrollment_date',
-//            'status',
-//            'level',
-//            [
-//                'class' => ActionColumn::className(),
-//                'urlCreator' => function ($action, Students $model, $key, $index, $column) {
-//                    return Url::toRoute([$action, 'id' => $model->id]);
-//                }
-//            ],
-//        ],
-//    ]); ?>
 
 
 </div>
