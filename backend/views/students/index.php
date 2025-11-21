@@ -18,9 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="students-index">
 
-
-    <div class="classes-index" style="background-color: #F6F7FB">
-
         <div class="row position-relative">
             <div class="col-12 f-14 d-flex align-items-center justify-content-between" style="padding: 10px; border-radius:10px;background:#fff;box-shadow:0px 0px 1px 0px gray; display: flex; align-items: center">
                 <div class="d-flex align-items-center gap-2">
@@ -82,7 +79,6 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
 
         </div>
-    </div>
 
 
 </div>

@@ -103,5 +103,32 @@ class Students extends \yii\db\ActiveRecord
         return $this->hasOne(Classes::class, ['id' => 'class_id']);
     }
 
+    public function getStudentPayments()
+    {
+        return $this->hasMany(StudentPayments::class, ['id' => 'student_id']);
+    }
+
+    // Get latest payment
+    public function getLastPayment()
+    {
+        return $this->hasOne(StudentPayments::class, ['id' => 'student_id'])
+            ->orderBy(['fee_date' => SORT_DESC]);
+    }
+
+    public function getPaymentStatus()
+    {
+        $payment = $this->lastPayment;
+
+        if (!$payment) return 'Unpaid';
+
+        if ($payment->due_balance == 0) return 'Paid';
+
+        if ($payment->deposit_amount > 0 && $payment->deposit_amount < $payment->total_amount)
+            return 'Partial';
+
+        if ($payment->due_balance > 0) return 'Due';
+
+        return 'Unpaid';
+    }
 
 }

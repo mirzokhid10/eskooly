@@ -105,6 +105,7 @@ class SiteController extends Controller
             ];
         }
 
+
         return $this->render('dashboard', [
             'totalStudents' => $totalStudents,
             'studentsThisMonth' => $studentsThisMonth,

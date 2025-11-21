@@ -8,39 +8,221 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 ?>
-
-<header class="relative fixed top-0 left-0 right-0 h-16 bg-white shadow-lg flex items-center justify-between px-4 z-40">
-    <!-- Burger Button and Logo/Title -->
-    <div class="flex items-center space-x-4">
-        <!-- Toggle Button -->
-        <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <svg id="burger-icon" class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <!-- Hamburger icon (when open) -->
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
-
-        <!-- Logo/Title -->
-        <div class="hidden sm:block">
-            <a href="<?php Url::to(['/']) ?>">
-                <?= Html::img('@web/assets/icons/logo1.png', ['alt' => 'My Application Logo', 'class' => 'logo']) ?>
-            </a>
-        </div>
-    </div>
-
-    <!-- Search Form -->
-    <form class="hidden sm:block w-full max-w-lg mx-8">
-        <label for="search" class="sr-only">Search</label>
-        <div class="relative">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+<div class="navbar-bg "></div>
+<nav class="navbar navbar-expand-lg main-navbar">
+    <form class="form-inline mr-auto">
+        <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+        </ul>
+        <div class="search-element">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
+            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+            <div class="search-backdrop"></div>
+            <div class="search-result">
+                <div class="search-header">
+                    Histories
+                </div>
+                <div class="search-item">
+                    <a href="#">How to hack NASA using CSS</a>
+                    <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+                </div>
+                <div class="search-item">
+                    <a href="#">Kodinger.com</a>
+                    <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+                </div>
+                <div class="search-item">
+                    <a href="#">#Stisla</a>
+                    <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+                </div>
+                <div class="search-header">
+                    Result
+                </div>
+                <div class="search-item">
+                    <a href="#">
+                        <img class="mr-3 rounded" width="30" src="assets/img/products/product-3-50.png" alt="product">
+                        oPhone S9 Limited Edition
+                    </a>
+                </div>
+                <div class="search-item">
+                    <a href="#">
+                        <img class="mr-3 rounded" width="30" src="assets/img/products/product-2-50.png" alt="product">
+                        Drone X2 New Gen-7
+                    </a>
+                </div>
+                <div class="search-item">
+                    <a href="#">
+                        <img class="mr-3 rounded" width="30" src="assets/img/products/product-1-50.png" alt="product">
+                        Headphone Blitz
+                    </a>
+                </div>
+                <div class="search-header">
+                    Projects
+                </div>
+                <div class="search-item">
+                    <a href="#">
+                        <div class="search-icon bg-danger text-white mr-3">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        Stisla Admin Template
+                    </a>
+                </div>
+                <div class="search-item">
+                    <a href="#">
+                        <div class="search-icon bg-primary text-white mr-3">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        Create a new Homepage Design
+                    </a>
+                </div>
             </div>
-            <input type="search" id="search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-xl bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Search orders, customers, or reports..." required>
         </div>
     </form>
-
-    <!-- Profile Placeholder -->
-    <div class="flex items-center space-x-2">
-        <img src="https://placehold.co/32x32/1a56db/ffffff?text=U" alt="Profile" class="rounded-full w-8 h-8 object-cover">
-    </div>
-</header>
+    <ul class="navbar-nav navbar-right">
+        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                <div class="dropdown-header">Messages
+                    <div class="float-right">
+                        <a href="#">Mark All As Read</a>
+                    </div>
+                </div>
+                <div class="dropdown-list-content dropdown-list-message">
+                    <a href="#" class="dropdown-item dropdown-item-unread">
+                        <div class="dropdown-item-avatar">
+                            <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle">
+                            <div class="is-online"></div>
+                        </div>
+                        <div class="dropdown-item-desc">
+                            <b>Kusnaedi</b>
+                            <p>Hello, Bro!</p>
+                            <div class="time">10 Hours Ago</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item dropdown-item-unread">
+                        <div class="dropdown-item-avatar">
+                            <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle">
+                        </div>
+                        <div class="dropdown-item-desc">
+                            <b>Dedik Sugiharto</b>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                            <div class="time">12 Hours Ago</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item dropdown-item-unread">
+                        <div class="dropdown-item-avatar">
+                            <img alt="image" src="assets/img/avatar/avatar-3.png" class="rounded-circle">
+                            <div class="is-online"></div>
+                        </div>
+                        <div class="dropdown-item-desc">
+                            <b>Agung Ardiansyah</b>
+                            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <div class="time">12 Hours Ago</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="dropdown-item-avatar">
+                            <img alt="image" src="assets/img/avatar/avatar-4.png" class="rounded-circle">
+                        </div>
+                        <div class="dropdown-item-desc">
+                            <b>Ardian Rahardiansyah</b>
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit ess</p>
+                            <div class="time">16 Hours Ago</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="dropdown-item-avatar">
+                            <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle">
+                        </div>
+                        <div class="dropdown-item-desc">
+                            <b>Alfa Zulkarnain</b>
+                            <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
+                            <div class="time">Yesterday</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="dropdown-footer text-center">
+                    <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </li>
+        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                <div class="dropdown-header">Notifications
+                    <div class="float-right">
+                        <a href="#">Mark All As Read</a>
+                    </div>
+                </div>
+                <div class="dropdown-list-content dropdown-list-icons">
+                    <a href="#" class="dropdown-item dropdown-item-unread">
+                        <div class="dropdown-item-icon bg-primary text-white">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="dropdown-item-desc">
+                            Template update is available now!
+                            <div class="time text-primary">2 Min Ago</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="dropdown-item-icon bg-info text-white">
+                            <i class="far fa-user"></i>
+                        </div>
+                        <div class="dropdown-item-desc">
+                            <b>You</b> and <b>Dedik Sugiharto</b> are now friends
+                            <div class="time">10 Hours Ago</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="dropdown-item-icon bg-success text-white">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="dropdown-item-desc">
+                            <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
+                            <div class="time">12 Hours Ago</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="dropdown-item-icon bg-danger text-white">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="dropdown-item-desc">
+                            Low disk space. Let's clean it!
+                            <div class="time">17 Hours Ago</div>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <div class="dropdown-item-icon bg-info text-white">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="dropdown-item-desc">
+                            Welcome to Stisla template!
+                            <div class="time">Yesterday</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="dropdown-footer text-center">
+                    <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </li>
+        <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-title">Logged in 5 min ago</div>
+                <a href="features-profile.html" class="dropdown-item has-icon">
+                    <i class="far fa-user"></i> Profile
+                </a>
+                <a href="features-activities.html" class="dropdown-item has-icon">
+                    <i class="fas fa-bolt"></i> Activities
+                </a>
+                <a href="features-settings.html" class="dropdown-item has-icon">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item has-icon text-danger">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+</nav>

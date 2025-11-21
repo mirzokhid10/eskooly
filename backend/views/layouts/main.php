@@ -1,85 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 use yii\helpers\Html;
+use backend\assets\BootsAsset;
+
+BootsAsset::register($this);
 ?>
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toggleable Sidebar Dashboard</title>
+  <meta charset="<?= Yii::$app->charset ?>">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+  <title><?= Html::encode($this->title ?? 'Dashboard — Stisla') ?></title>
+  <?= Html::csrfMetaTags() ?>
+  <?php $this->head() ?>
+  <?= Html::cssFile('@web/assets/css/style.css') ?>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css" />
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Toastr CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>
+  window.dataLayer = window.dataLayer || [];
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css" />
-
-    <?= Html::cssFile('@web/assets/css/style.css') ?>
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'UA-94034622-3');
+  </script>
 </head>
 
-<body class="sidebar-open bg-gray-50">
+<body>
+  <?php $this->beginBody() ?>
 
-<?= $this->render('header') ?>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <?= $this->render('header')?>
+      <?= $this->render('sidebar') ?>
 
-<!-- MAIN CONTAINER -->
-<div class="flex-grow">
-    <?= $this->render('sidebar') ?>
-    <div id="main-content" class="p-6 shadow-inner" style="background-color: #F6F7FB">
-        <?= $content ?>
+      <!-- Main Content -->
+      <div class="main-content" style="background: #F6F7FB">
+        <section class="section">
+          <?= $content ?>
+        </section>
+
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- ✅ JS FILES (put BEFORE $this->endBody()) -->
-<?= Html::jsFile('@web/assets/js/sidebar.js') ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<!--Charts JS-->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
-<?php
+  <?php
 $flashes = Yii::$app->session->getAllFlashes();
 if (!empty($flashes)): ?>
-    <div aria-live="polite" aria-atomic="true" class="position-relative">
-        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
-            <?php foreach ($flashes as $type => $message): ?>
-                <div class="toast align-items-center text-bg-<?= $type === 'error' ? 'danger' : ($type === 'warning' ? 'warning' : 'success') ?> border-0 mb-2" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            <?= $message ?>
-                        </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+  <div aria-live="polite" aria-atomic="true" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+    <?php foreach ($flashes as $type => $message): ?>
+    <?php
+            // map Yii flash types to Bootstrap colors
+            $bg = match ($type) {
+                'error' => 'danger',
+                'success' => 'success',
+                'warning' => 'warning',
+                'info' => 'info',
+                default => 'secondary',
+            };
+            ?>
+    <div class="toast align-items-center text-bg-<?= $bg ?> border-0 mb-2" role="alert" aria-live="assertive"
+      aria-atomic="true" data-bs-delay="4000" data-bs-autohide="true">
+      <div class="d-flex">
+        <div class="toast-body fw-semibold">
+          <?= $message ?>
         </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
     </div>
+    <?php endforeach; ?>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toastElList = [].slice.call(document.querySelectorAll('.toast'))
-            toastElList.map(function(toastEl) {
-                const toast = new bootstrap.Toast(toastEl, { delay: 4000 })
-                toast.show()
-            })
-        })
-    </script>
-<?php endif; ?>
-<?php
-    \yii\web\YiiAsset::register($this);
-    \yii\bootstrap5\BootstrapAsset::register($this);
-    \yii\bootstrap5\BootstrapPluginAsset::register($this);
-?>
-<script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toastElements = document.querySelectorAll('.toast');
+    toastElements.forEach(el => {
+      const t = new bootstrap.Toast(el);
+      t.show();
+    });
+  });
+  </script>
+  <?php endif; ?>
+
+
+  <?php $this->endBody() ?>
+  <!--<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('.datatable').DataTable();
+  });
+  </script>
 </body>
+
 </html>
+<?php $this->endPage() ?>

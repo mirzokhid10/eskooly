@@ -160,7 +160,6 @@ class StudentsController extends Controller
         ]);
     }
 
-
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
@@ -173,13 +172,6 @@ class StudentsController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Students model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id
-     * @return Students the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Students::findOne($id)) !== null) {
@@ -237,6 +229,27 @@ class StudentsController extends Controller
         return $this->render('admission-letter', [
             'student' => $student,
         ]);
+    }
+
+    public function actionBasicList()
+    {
+        $classId = Yii::$app->request->get('class_id'); // get selected class id
+        $query = Students::find();
+
+        if (!empty($classId)) {
+            // filter by class_id using the pivot table (student_classes)
+            $query->joinWith('studentClasses')->where(['student_classes.class_id' => $classId]);
+        }
+
+        $students = $query->all();
+        $classes = Classes::find()->select(['name', 'id'])->asArray()->all();
+
+        return $this->render('basic-list', [
+            'students' => $students,
+            'classes' => $classes,
+            'selectedClass' => $classId,
+        ]);
+
     }
 
 

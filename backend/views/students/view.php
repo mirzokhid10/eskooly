@@ -46,7 +46,7 @@ $this->registerJsFile('https://cdn.jsdelivr.net/npm/chart.js', ['depends' => [\y
                             </div>
                         </div>
                         <div class="row rounded-4 canvas_div_pdf mt-3">
-                            <div class="col-lg-3 col-md-12 text-center rounded-4 mb-1 border-light-subtle" style="background:#fff; box-shadow: 0px 0px 1px 1px gray;">
+                            <div class="col-lg-3 col-md-12 text-center rounded-4 mb-1 border-light-subtle bg-white" style="box-shadow: 0px 0px 1px 1px gray;">
                                 <div class="pt-3">
                                     <img class="img-fluid rounded-circle mx-auto"
                                          src="<?= empty($model->photo) || !file_exists(Yii::getAlias('@webroot/' . $model->photo))
@@ -322,10 +322,7 @@ $this->registerJsFile('https://cdn.jsdelivr.net/npm/chart.js', ['depends' => [\y
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
-
                                     </div>
                                     <div class="col-lg-6">
                                         <h6 class="w-100">
@@ -393,35 +390,6 @@ $this->registerJsFile('https://cdn.jsdelivr.net/npm/chart.js', ['depends' => [\y
         </div>
     </div>
 </div>
-<!--    <h1>--><?php //= Html::encode($this->title) ?><!--</h1>-->
-<!---->
-<!--    <p>-->
-<!--        --><?php //= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-<!--        --><?php //= Html::a('Delete', ['delete', 'id' => $model->id], [
-//            'class' => 'btn btn-danger',
-//            'data' => [
-//                'confirm' => 'Are you sure you want to delete this item?',
-//                'method' => 'post',
-//            ],
-//        ]) ?>
-<!--    </p>-->
-
-<!--    --><?php //= DetailView::widget([
-//        'model' => $model,
-//        'attributes' => [
-//            'name',
-//            'email:email',
-//            'phone',
-//            'date_of_birth',
-//            'photo',
-//            'enrollment_date',
-//            'status',
-//            'level',
-//            'last_login',
-//         ],
-//    ]) ?>
-
-
 
 <script>
     // ✅ When page fully loaded
